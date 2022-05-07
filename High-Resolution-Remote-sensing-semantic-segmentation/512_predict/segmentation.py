@@ -92,15 +92,10 @@ def parse_args():
     # #Deeplab
     parser.add_argument("--model-path", type=str,
                         # default=r"D:\dataset\Graduation_project\model\512\U_net_final\resnet50\background\epoch_25_acc_0.77646_kappa_0.68166.pth"
-                        # default=r"D:\dataset\Graduation_project\model\512\deeplabv3_version_1_final\resnet50\background\epoch_0_acc_0.79348_kappa_0.71046.pth"
-                        # default=r"D:\\dataset\\Graduation_project\\model\\512_final\\FPN\\resnet50\\background\\epoch_1_acc_0.78561_kappa_0.69759.pth"
-                        # default=r"D:\dataset\Graduation_project\model\512\FCNs_final\resnet50\background\epoch_5_acc_0.75629_kappa_0.65846.pth"
-                        # default=r"D:\dataset\Graduation_project\model\512\SegNet\resnet50\background\epoch_5_acc_0.73382_kappa_0.62119.pth"
                         # default=r"D:\dataset\Graduation_project\model\512\PSPNet\resnet50\background\epoch_15_acc_0.77735_kappa_0.68602.pth"
                         # default=r"D:\dataset\Graduation_project\model\512\GCN\resnet50\background\epoch_17_acc_0.78079_kappa_0.69210.pth"
                         default=r"D:\dataset\Graduation_project\model\512\Deeplabv3Plus\resnet50\background\epoch_16_acc_0.78867_kappa_0.70419.pth"
                         # default=r"D:\dataset\Graduation_project\model\512\FCN8s\resnet50\background\epoch_12_acc_0.77841_kappa_0.68538.pth"
-                        # default=r"D:\dataset\Graduation_project\model\512\FCN16s\resnet50\background\epoch_1_acc_0.75843_kappa_0.66177.pth"
                         # default=r"D:\dataset\Graduation_project\model\512\FCN32s\resnet50\background\epoch_10_acc_0.77525_kappa_0.68374.pth"
                         )
     # parser.add_argument("--pred-path", type=str, default="")
@@ -186,68 +181,11 @@ def reference(csv_file, save_path, image_path):
 
 
 if __name__ == '__main__':
-    csv_file_list = [
-        # r'C:\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\sy_part_rgb.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001670888-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001821711-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001910522-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000635115-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001092725-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001119057-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001246644-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001396036-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001787080-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000564692-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001680851-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001116444-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000607681-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001787089-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001680853-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001734328-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000607681-MSS2.csv'
-    ]
+    csv_file_list = [ ]
 
-    save_path = [
-        # r"D:\dataset\Graduation_project\Graduation_result\512_final",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_1",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_2",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_3",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_4",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_5",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_6",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_7",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_8",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_9",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_10",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_11",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_12",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_13",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_14",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_15",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_16",
-        "D:\\dataset\\Graduation_project\\Graduation_result\\512_final_GID\\image_val_17"
-    ]
+    save_path = [ ]
 
-    image_path = [
-        # "C:\\code\\dxj\\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\\tools\\data_512\\sy_image_new",
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_1',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_2',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_3',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_4',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_5',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_6',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_7',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_8',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_9',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_10',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_11',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_12',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_13',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_14',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_15',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_16',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\image_val_17'
-    ]
+    image_path = [ ]
     for i in tqdm(range(len(csv_file_list))):
-    # for i in tqdm(range(0, 10)):
+    # for i in tqdm(range(0, 15)):
         reference(csv_file_list[i], save_path[i], image_path[i])
