@@ -81,11 +81,6 @@ def train_init(image, lr, momentum, dim):
     model = model.cuda()
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=momentum)
-    # optimizer = torch.optim.RMSprop(model.parameters(), lr=1e-1, momentum=0.0)
-
-    # image_flatten = building_image.reshape((-1, 7))
-    # color_avg = np.random.randint(255, size=(args.max_label_num, 7))
-    # show = building_image[0]
     return tensor, model, criterion, optimizer, device
 
 
@@ -164,15 +159,12 @@ def snapshot_forward(dataloader):
     image_classify = dataloader[3].unsqueeze(0)
     image_mask = cv2.imread(image_path)
 
-    # image_mask = np.array(building_image)[0]
-    # seg_lab = np.load(dataloader[5], allow_pickle=True).tolist()
     seg_lab = segmentation_ML(image_mask, scale, sigma, min_size)
     seg_lab = np.array(seg_lab)
     if not os.path.exists(save_csv_path[dataloader[4]]):
         os.makedirs(save_csv_path[dataloader[4]])
     np.save(save_csv_path[dataloader[4]] + '\\' + image_path.split('\\')[-1][:-4] + '_seg.npy', seg_lab)
-    # dataset_1 = gdal.Open(dataloader[6])
-    # show = dataset_1.GetRasterBand(1).ReadAsArray()
+
     tensor, model, criterion, optimizer, device = train_init(image_mask, lr, 0.9, dim_num)
 
     show = train(args_train.train_epoch, tensor, seg_lab, model, optimizer, criterion, image_mask, min_label_num,
@@ -357,45 +349,8 @@ def parse_args():
     #                     default="D:\\dataset\\Graduation_project\\model\\dense_model_512\\79.374_4.pkl")
     parser.add_argument("--pred-path", type=str, default="")
 
-    # parser.add_argument("--model-name", type=list,
-    #                     default=['\\background\\epoch_22_acc_0.97907_kappa_0.96622.pth',
-    #                              '\\city\\epoch_12_acc_0.79866_kappa_0.69126.pth',
-    #                              '\\farm_land\\epoch_18_acc_0.91414_kappa_0.85720.pth',
-    #                              '\\forest\\epoch_8_acc_0.77756_kappa_0.65722.pth',
-    #                              '\\meadow\\epoch_27_acc_0.74202_kappa_0.49539.pth',
-    #                              '\\water\\epoch_27_acc_0.90872_kappa_0.85935.pth'])
-    # # u-net
-    # parser.add_argument("--model-name", type=list,
-    #                     default=['\\background\\epoch_25_acc_0.77646.pth',
-    #                              '\\city\\epoch_25_acc_0.62074.pth',
-    #                              '\\farm_land\\epoch_28_acc_0.76650.pth',
-    #                              '\\forest\\epoch_28_acc_0.60874.pth',
-    #                              '\\meadow\\epoch_25_acc_0.53419.pth',
-    #                              '\\water\\epoch_25_acc_0.71684.pth'])
-    # FPN
-    # parser.add_argument("--model-name", type=list,
-    #                     default=['\\background\\epoch_1_acc_0.78561.pth',
-    #                              '\\city\\epoch_17_acc_0.67407_kappa.pth',
-    #                              '\\farm_land\\epoch_29_acc_0.65597.pth',
-    #                              '\\forest\\epoch_28_acc_0.70561.pth',
-    #                              '\\meadow\\epoch_25_acc_0.51215.pth',
-    #                              '\\water\\epoch_25_acc_0.64132.pth'])
-    # PSPNet
-    # parser.add_argument("--model-name", type=list,
-    #                     default=['\\background\epoch_15_acc_0.77735.pth',
-    #                              '\\city\\epoch_28_acc_0.73467.pth',
-    #                              '\\farm_land\\epoch_28_acc_0.71414.pth',
-    #                              '\\forest\\epoch_27_acc_0.63749.pth',
-    #                              '\\meadow\\epoch_29_acc_0.52198.pth',
-    #                              '\\water\\epoch_28_acc_0.70290.pth'])
-    #GCN
     parser.add_argument("--model-name", type=list,
-                        default=['\\background\epoch_17_acc_0.78079.pth',
-                                 '\\city\\epoch_26_acc_0.67207.pth',
-                                 '\\farm_land\\epoch_25_acc_0.75474.pth',
-                                 '\\forest\\epoch_27_acc_0.63719.pth',
-                                 '\\meadow\\epoch_21_acc_0.50925.pth',
-                                 '\\water\\epoch_27_acc_0.69240.pth'])
+                        default=[])
     parser.add_argument("--save-path", type=str,
                         default="D:\\dataset\\Graduation_project\\Graduation_result\\512\\" + 'classify' + "_result_final\\resnet152_final_pre_16")
     parser.add_argument("--csv-file", type=str,
@@ -449,7 +404,7 @@ save_unsupervised_path = []
 save_segementation_path = []
 save_supervised_path = []
 save_csv_path = []
-for k in range(10, 11):
+for k in range(15):
     save_unsupervised = r"D:\dataset\Graduation_project\Graduation_result\512_final_GID\image_val_" + str(
         k + 1) + "\image_unsupervised_16\image_unsupervised"
     save_unsupervised_path.append(save_unsupervised)
@@ -465,35 +420,9 @@ for k in range(10, 11):
 
 
 def main():
-    classify_list = [
-        # 'image_val_1', 'image_val_2', 'image_val_3', 'image_val_4', 'image_val_5', 'image_val_6',
-        # 'image_val_7',
-        # 'image_val_8', 'image_val_9', 'image_val_10',
-        'image_val_11',
-        # 'image_val_12', 'image_val_13',
-        # 'image_val_14', 'image_val_15', 'image_val_16', 'image_val_17'
-    ]
+    classify_list = [ ]
 
-    csv_file_list = [
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001670888-MSS1.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001821711-MSS1.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001910522-MSS1.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000635115-MSS2.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001092725-MSS2.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001119057-MSS2.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001246644-MSS2.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001396036-MSS2.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001787080-MSS2.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000564692-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001680851-MSS1.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001116444-MSS2.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000607681-MSS2.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001787089-MSS2.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001680853-MSS1.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001734328-MSS1.csv',
-        # r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000607681-MSS2.csv'
-
-    ]
+    csv_file_list = [ ]
     for i in range(len(classify_list)):
         args.test_data_root = "C:\\Users\\dell\\code\\dxj\\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\\tools\\data_512\\" + \
                               classify_list[i]
