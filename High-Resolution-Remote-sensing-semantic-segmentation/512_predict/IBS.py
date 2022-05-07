@@ -58,25 +58,7 @@ if __name__ == "__main__":
     new_h, new_w = (h // 512 + 1) * 512, (w // 512 + 1) * 512  # 填充下边界和右边界得到滑窗的整数倍
     zeros = (new_h + 128, new_w + 128)  # 填充空白边界，考虑到边缘数据
     zeros = np.zeros(zeros, np.uint8)
-    csv_file_list = [
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001670888-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001821711-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001910522-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000635115-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001092725-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001119057-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001246644-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001396036-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001787080-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000564692-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001680851-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001116444-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000607681-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0001787089-MSS2.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001680853-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS1__L1A0001734328-MSS1.csv',
-        r'C:\Users\dell\code\dxj\High-Resolution-Remote-Sensing-Semantic-Segmentation-PyTorch-master\tools\data_512\GF2_PMS2__L1A0000607681-MSS2.csv'
-    ]
+    csv_file_list = []
     root_dir_list = []
     save_dir_list = []
     for k in range(17):
